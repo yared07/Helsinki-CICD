@@ -15,5 +15,7 @@ jobs:
           node-version: '16'
       - name: npm install
         run: npm install
+        working-directory: full-stack-open-pokedex/
       - name: lint
         run: npm run eslint
+        working-directory: full-stack-open-pokedex/
