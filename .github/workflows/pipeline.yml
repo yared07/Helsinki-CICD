@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - name: navigate to the root dir
+        run: cd full-stack-open-pokedex/
       - name: npm install
         run: npm install
       - name: lint
