@@ -17,8 +17,8 @@ jobs:
         with:
             severity: info
             text: Build Failed
-            description: 
-            details: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} failed to build :(
+            description: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} failed to build :(
+            # details: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} failed to build :(
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
