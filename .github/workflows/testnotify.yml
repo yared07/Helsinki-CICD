@@ -17,6 +17,7 @@ jobs:
         with:
             severity: info
             description: this is the title
+            text: this is the text
             details: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }}
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
