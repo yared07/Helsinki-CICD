@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: check the directory  
-        run: pwd
+        run: pwd && ls -a
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.64.0
         env:
