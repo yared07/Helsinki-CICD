@@ -25,3 +25,4 @@ jobs:
       - name: Test skip functionality
         if: ${{ github.event_name == 'push' && contains(github.event.commits.*.message, '#skip') }}
         run: echo "Hi it was successful"
+        
