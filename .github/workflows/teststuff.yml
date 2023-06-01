@@ -22,3 +22,6 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: Deploy to Render
+        if: ${{ github.event_name == 'push' }} && ${{github.event.commits.*.message[0] == '#skip'}}
+        run: echo "Hi it was successful"
