@@ -1,4 +1,4 @@
-name: Testing stuff
+name: Testing notfy
 
 on:
   push:
@@ -16,7 +16,8 @@ jobs:
         if: success()
         with:
             severity: info
-            details: Test Succeeded!
+            title: this is the title
+            details: commit url ${{ github.event.commits.*.url }}
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
