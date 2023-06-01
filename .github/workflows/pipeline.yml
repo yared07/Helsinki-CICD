@@ -9,44 +9,44 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: npm install
-        run: npm install
-        working-directory: full-stack-open-pokedex/
-      - name: lint
-        run: npm run eslint
-        working-directory: full-stack-open-pokedex/
-      - name: build
-        run: npm run build
-        working-directory: full-stack-open-pokedex/
-      - name: test
-        run: npm run test
-        working-directory: full-stack-open-pokedex/
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-          working-directory: full-stack-open-pokedex/
-      - name: Deploy to Render
-        if: ${{ github.event_name == 'push' }}
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+  # simple_deployment_pipeline:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
+  #     - name: npm install
+  #       run: npm install
+  #       working-directory: full-stack-open-pokedex/
+  #     - name: lint
+  #       run: npm run eslint
+  #       working-directory: full-stack-open-pokedex/
+  #     - name: build
+  #       run: npm run build
+  #       working-directory: full-stack-open-pokedex/
+  #     - name: test
+  #       run: npm run test
+  #       working-directory: full-stack-open-pokedex/
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v5
+  #       with:
+  #         command: npm run test:e2e
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
+  #         working-directory: full-stack-open-pokedex/
+  #     - name: Deploy to Render
+  #       if: ${{ github.event_name == 'push' }}
+  #       run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
   tag_release:
-    needs: [simple_deployment_pipeline]
+    # needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
+      - name: check the directory  
+        run: pwd
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: check the directory  
-        run: pwd
